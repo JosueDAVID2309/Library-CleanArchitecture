@@ -11,7 +11,7 @@ import static org.hamcrest.Matchers.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-public class AuthorServletTest {
+public class AuthorApiIT {
     DBConexion conexion;
     
     @BeforeEach
@@ -26,7 +26,7 @@ public class AuthorServletTest {
             given().
                 body("""
                      {
-                        "name": "Robert Kiyosaki"
+                        "name": "Random Author"
                      }
                      """)
                 .contentType(ContentType.JSON)
@@ -40,7 +40,7 @@ public class AuthorServletTest {
         }finally{
             try(Connection con = conexion.getConnection();
                     PreparedStatement stmt = con.prepareStatement("DELETE FROM Author WHERE name = ?")){
-                stmt.setString(1, "Robert Kiyosaki");
+                stmt.setString(1, "Random Author");
                 stmt.executeUpdate();
                 
             }
