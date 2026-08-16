@@ -17,7 +17,7 @@ public class AddNewBookUseCase {
     
     public void execute(NewBookDTO newBook){
         
-        if(!isAuthorRegistered(newBook.getAuthorId())){
+        if(!authorRepository.existsById(newBook.getAuthorId())){
             throw new AuthorNotRegisteredException();
         }
         
@@ -26,10 +26,6 @@ public class AddNewBookUseCase {
         book.setAuthorId(newBook.getAuthorId());
         
         bookRepository.registerBook(book);
-    }
-    
-    private boolean isAuthorRegistered(int idAuthor){
-        return authorRepository.existsById(idAuthor);
     }
     
 }
